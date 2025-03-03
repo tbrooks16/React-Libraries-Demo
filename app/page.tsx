@@ -1,9 +1,7 @@
-import { ModeToggle } from "./next-themes/modetoggle";
-
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <ModeToggle />
+    <main className="flex min-h-screen flex-col p-24 gap-3">
+      <h1 className="text-3xl">Home Page</h1>
     </main>
   );
 }

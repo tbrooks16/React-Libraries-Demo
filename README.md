@@ -1,24 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# React Library POC
+
+This is a demo of popular libraries I've used or am familiar with to reason on their viability in an ITS application.
+
+Libraries used are:
+
+- [Axios](https://axios-http.com/docs/intro) _HTTP Client_
+- [Tanstack Query](https://tanstack.com/query/latest) _State Management and HTTP Library_
+- [React Hook Form](https://react-hook-form.com) _Most popular form Library_
+- [React Router](https://reactrouter.com/home) _Routing Library_
+- [Tanstack Form](https://tanstack.com/form/latest) _Tanstack Form Library_
+- [Posthog](https://posthog.com) _Analytics Library_
+- [Zustand](https://zustand.docs.pmnd.rs/getting-started/introduction) _State Management Library_
+- [Prisma](https://www.prisma.io) _Relational ORM_
+- [Shadcn](https://ui.shadcn.com) _UI Component Library_
+  - Uses [Radix UI](https://www.radix-ui.com) to build accessible components
+- [Zod](https://zod.dev) or [Yup](https://github.com/jquense/yup) _Schema Validation Library_
+- [Prettier](https://prettier.io) _Code styling_
+- [Motion](https://motion.dev) _Previously known as Framer Motion, Motion is an animation library._
 
 ## Getting Started
 
 First, run the development server:
 
+> [!NOTE]
+> You need to have node installed to run this application.
+
 ```bash
-npm run dev
+pnpm install
 # or
-yarn dev
-# or
+npm install
+-----
 pnpm dev
 # or
-bun dev
+npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
 ## Learn More
 
