@@ -11,7 +11,7 @@ import {
 } from "./ui/command";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
-import { Message, questions } from "./ui/Chatbot";
+import { Message, questions } from "./Chatbot";
 
 export const Combobox = ({
   value,

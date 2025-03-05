@@ -1,18 +1,19 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Button } from "./button";
-import { Label } from "./label";
-import Conversation, { Chat } from "../Conversation";
-import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
+import { Button } from "./ui/button";
+import { Label } from "./ui/label";
+import Conversation, { Chat } from "./Conversation";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { toast } from "sonner";
-import { Combobox } from "../QuestionBox";
+import { Combobox } from "./QuestionBox";
 
 import {
   clearHistory,
   fetchMessages,
   sendMessage,
 } from "@/app/clientApi/conversation";
+import { H2 } from "./ui/Headings";
 
 export const questions = [
   "Hello",
@@ -79,11 +80,9 @@ export default function Chatbot() {
   window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="grow" onSubmit={handleSubmit}>
       <div className="flex flex-col gap-2 items-center">
-        <Label htmlFor="chatbot" className="text-2xl text-center">
-          Ask me a question
-        </Label>
+        <H2>Ask me a question</H2>
         <Avatar className="w-64 h-64">
           <AvatarImage src="/chatbot.png"></AvatarImage>
           <AvatarFallback>Chatbot</AvatarFallback>
@@ -95,7 +94,7 @@ export default function Chatbot() {
           <Chat animateEntry message={message} i={data!.length} />
           <Chat
             animateEntry={false}
-            className={streamedResponse ? "" : "opacity-50"}
+            className={streamedResponse ? "" : "opacity-50 animate-pulse"}
             message={streamedResponse || "AI is typing..."}
             i={data!.length + 1}
           />

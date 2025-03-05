@@ -1,8 +1,72 @@
-import Chatbot from "@/components/ui/Chatbot";
+import Chatbot from "@/components/Chatbot";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { H1 } from "@/components/ui/Headings";
+import { Separator } from "@/components/ui/separator";
 
 export default function Page() {
   return (
-    <div className="m-10">
+    <div className="m-10 flex gap-5">
+      <div className="my-4 w-1/2 relative">
+        <div className="sticky top-24">
+          <Alert>
+            <AlertTitle>Look at the code</AlertTitle>
+            <AlertDescription>
+              Check out the code for the chatbot in Chatbot.tsx
+            </AlertDescription>
+          </Alert>
+          <H1>Tanstack Query</H1>
+          <p className="text-muted-foreground my-2">
+            This is a simple demonstration of Tanstack Query. Ask the bot
+            questions and it will respond with an answer from the database.
+          </p>
+          <Separator />
+          <div className="my-2">
+            <div className="text-muted-foreground text-sm">Fresh Start</div>
+            <p>
+              When you open this page for the first time, it makes a client side
+              request to the backend requesting the conversation history.
+            </p>
+            <p>
+              It will return an empty array because you have no conversation
+              history.
+            </p>
+          </div>
+          <div className="my-2">
+            <div className="text-muted-foreground text-sm">Stored Data</div>
+            <p>
+              When you visit the page and have a conversation history, it will
+              return the data and ask if you want to continue your conversation.
+            </p>
+          </div>
+          <Separator />
+          <p className="my-4">
+            Every time you <strong>send</strong> a message the conversation is
+            re-fetched and cached on the client for two minutes. When you
+            navigate away from the page and come back within two minutes the
+            data will be served from the cache instead of making a request to
+            the server. After the two minutes the data will be considered stale.
+            Any <strong>cached</strong> queries that have a stale status will be
+            re-fetched when triggered.
+          </p>
+          <p>
+            I believe Tanstack Query is very powerful and there are massive
+            opportunities to use it with the AI application. Here are some
+            contexts I think it will be useful in.
+          </p>
+          <ul className="m-4">
+            <li className="list-disc list-inside m-2">
+              Caching conversation history
+            </li>
+            <li className="list-disc list-inside m-2">
+              Automatic retries on post requests.
+            </li>
+            <li className="list-disc list-inside m-2">
+              Uniform and dry data fetching model
+            </li>
+            {/* <li className="list-disc list-inside m-2"></li> */}
+          </ul>
+        </div>
+      </div>
       <Chatbot />
     </div>
   );

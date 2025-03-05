@@ -7,6 +7,7 @@ export async function GET() {
     const dbPath = path.join(process.cwd(), "app/db.json");
     const data = fs.readFileSync(dbPath, "utf8");
     const messages: { message: string; timestamp: string } = JSON.parse(data);
+    console.log("Data fetched");
     return NextResponse.json(messages);
   } catch (error) {
     console.log(error);
