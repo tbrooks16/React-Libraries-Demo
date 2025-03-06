@@ -17,8 +17,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Tanstack Query",
-  description: "An ai demo using Tanstack Query",
+  title: "React Libraries Demo",
+  description: "A demo application of important react libraries.",
 };
 
 export default function RootLayout({
