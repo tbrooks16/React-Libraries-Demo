@@ -36,6 +36,7 @@ const TanstackInput = ({
   errors,
   value,
   onChange,
+  isTouched,
 }: {
   label: string;
   type?: HTMLInputTypeAttribute;
@@ -43,6 +44,7 @@ const TanstackInput = ({
   errors: any[];
   value: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  isTouched: boolean;
 }) => {
   return (
     <div className="space-y-2">
@@ -53,16 +55,21 @@ const TanstackInput = ({
         placeholder={placeholder}
         type={type}
       />
-      <ErrorMessage errors={errors} />
+      <ErrorMessage errors={errors} isTouched={isTouched} />
     </div>
   );
 };
 
-const ErrorMessage = ({ errors }: { errors: any[] }) => {
-  console.log(errors);
+const ErrorMessage = ({
+  errors,
+  isTouched,
+}: {
+  errors: any[];
+  isTouched: boolean;
+}) => {
   return (
     <>
-      {errors.length ? (
+      {errors.length && isTouched ? (
         <em className="text-destructive dark:text-red-600">
           {errors.map((e) => e["message"]).join(",")}
         </em>
@@ -131,6 +138,7 @@ const Page1 = withForm({
               label="Email"
               placeholder="test@test.com"
               errors={field.state.meta.errors}
+              isTouched={field.state.meta.isTouched}
             />
           )}
         />
@@ -144,6 +152,7 @@ const Page1 = withForm({
               label="Password"
               placeholder="******"
               errors={field.state.meta.errors}
+              isTouched={field.state.meta.isTouched}
             />
           )}
         />
@@ -160,8 +169,9 @@ const Page2 = withForm({
     onChange: formSchema,
   },
   render: function Render({ form }) {
-    const experience = useStore(form.store, (state) => state.values.experience);
-    console.log({ form });
+    // Subscribe to errors to rerender
+    // Experience message wasn't popping up when validation occurred.
+    useStore(form.store, (state) => state.errors);
     return (
       <>
         <form.AppField
@@ -173,6 +183,7 @@ const Page2 = withForm({
               label="First Name"
               placeholder="John"
               errors={field.state.meta.errors}
+              isTouched={field.state.meta.isTouched}
             />
           )}
         />
@@ -185,6 +196,7 @@ const Page2 = withForm({
               label="Last Name"
               placeholder="Doe"
               errors={field.state.meta.errors}
+              isTouched={field.state.meta.isTouched}
             />
           )}
         />
@@ -201,16 +213,17 @@ const Page2 = withForm({
               onSelect={(val) => {
                 form.setFieldValue("experience", val);
                 form.setFieldValue("other", "");
+                form.validateField("experience", "change");
+                form.validateField("other", "change");
               }}
             />
           )}
         />
         <div>
-          {/* Error Message not working */}
+          {form.state.fieldMeta.experience?.isValidating}
           <ErrorMessage
-            key={experience}
-            errors={form.state.errors}
-            // errors={form.state?.fieldMeta?.experience?.errors ?? []}
+            errors={form.state?.fieldMeta?.experience?.errors ?? []}
+            isTouched={form.state.fieldMeta.experience?.isTouched}
           />
         </div>
         {form.state.values.experience === "Other" && (
@@ -223,6 +236,7 @@ const Page2 = withForm({
                 label="Other"
                 placeholder="Type your response here..."
                 errors={field.state.meta.errors}
+                isTouched={field.state.meta.isTouched}
               />
             )}
           />
@@ -277,6 +291,7 @@ const Page3 = withForm({
   },
 });
 
+// TODO Figure out how to only validate current on blur. Currently have to hide error messages with isTouched status
 const MyForm = () => {
   const [step, setStep] = useState(0);
   const [modifier, setModifier] = useState(1);
@@ -293,10 +308,6 @@ const MyForm = () => {
     onSubmit: ({ value }) => onSubmit(value as FormValues), // Assertion for compatibility
   });
 
-  const experience = useStore(form.store, (state) => state.values.experience);
-  console.log({ form: form.state.errorMap });
-  console.log(experience);
-
   const content = useMemo(() => {
     switch (step) {
       case 0:
@@ -306,7 +317,7 @@ const MyForm = () => {
       case 2:
         return <Page3 form={form} />;
     }
-  }, [step, experience]);
+  }, [step]);
 
   const { mutate } = useMutation({
     mutationFn: submitForm,

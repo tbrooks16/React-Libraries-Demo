@@ -57,6 +57,7 @@ export const NavigationButtons = ({
           onClick={() => {
             setModifier(-1);
             setStep(step - 1);
+            setIsSubmitDisabled(true);
           }}
           className="cursor-pointer disabled:cursor-not-allowed"
           variant="secondary"

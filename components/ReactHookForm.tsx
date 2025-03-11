@@ -272,7 +272,9 @@ export const formSchema = z
       .string({ required_error: "Last Name is required" })
       .trim()
       .min(1, "Last Name is required"),
-    experience: z.enum(experienceOptions),
+    experience: z.enum(experienceOptions, {
+      message: "Experience is required",
+    }),
     other: z.string({ required_error: "Other is required" }).optional(),
   })
   .refine(

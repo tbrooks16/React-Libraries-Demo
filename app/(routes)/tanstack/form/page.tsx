@@ -30,6 +30,21 @@ export default function Page() {
               Functionally both forms follow a similar format and share the same
               form schema.
             </p>
+            <p>
+              I had issues relocating components of this architecture to
+              separate files due to the way everything is being imported. I
+              didn't do a deep dive into solving these issues, so most of the
+              code for this page is located in the TanStackForm.tsx file.
+            </p>
+            <Alert>
+              <AlertTitle>Caveats</AlertTitle>
+              <AlertDescription>
+                Tanstack Form doesn't cause re-renders when interacting with the
+                form. So you might find yourself trying to use a form or field
+                state value without success.
+              </AlertDescription>
+            </Alert>
+            <p></p>
           </div>
         </div>
       </div>
