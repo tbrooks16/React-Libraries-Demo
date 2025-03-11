@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Button } from "./ui/button";
-import { Label } from "./ui/label";
 import Conversation, { Chat } from "./Conversation";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { toast } from "sonner";
@@ -24,8 +23,6 @@ export const questions = [
 ];
 
 export type Message = { message: string; timestamp: string };
-
-// TODO Animate the chat messages
 
 // ? Here we have a simple demo of a Form that submits data to the server and
 // ? receives a response. It performs a get request on mount and when submitted refetches the data.
@@ -81,9 +78,9 @@ export default function Chatbot() {
 
   return (
     <form className="grow" onSubmit={handleSubmit}>
-      <div className="flex flex-col gap-2 items-center">
+      <div className="flex flex-col items-center gap-2">
         <H2>Ask me a question</H2>
-        <Avatar className="w-64 h-64">
+        <Avatar className="h-64 w-64">
           <AvatarImage src="/chatbot.png"></AvatarImage>
           <AvatarFallback>Chatbot</AvatarFallback>
         </Avatar>
@@ -94,7 +91,7 @@ export default function Chatbot() {
           <Chat animateEntry message={message} i={data!.length} />
           <Chat
             animateEntry={false}
-            className={streamedResponse ? "" : "opacity-50 animate-pulse"}
+            className={streamedResponse ? "" : "animate-pulse opacity-50"}
             message={streamedResponse || "AI is typing..."}
             i={data!.length + 1}
           />
@@ -104,7 +101,7 @@ export default function Chatbot() {
       {index >= 10 && (
         <Button
           type="button"
-          className="cursor-pointer my-2"
+          className="my-2 cursor-pointer"
           variant="destructive"
           onClick={() => deleteFn()}
         >

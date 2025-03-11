@@ -11,29 +11,20 @@ import {
   FormMessage,
 } from "./ui/form";
 import { Input } from "./ui/input";
-import { Button } from "./ui/button";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "./ui/command";
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+
 import { H3 } from "./ui/Headings";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useMemo, useState, useTransition } from "react";
+import { useCallback, useMemo, useState, useTransition } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { submitForm } from "@/app/clientApi/form";
 import { motion, MotionConfig } from "motion/react";
-import { Check, ChevronsUpDown } from "lucide-react";
-import { cn, sleep } from "@/lib/utils";
+import { sleep } from "@/lib/utils";
 import { AnimatedFormWrapper, NavigationButtons } from "./AnimatedFormWrapper";
 import { toast } from "sonner";
+import { ExperienceComboBox, experienceOptions } from "./Combobox";
 
 export const ReactHookForm = () => {
   return (
@@ -144,7 +135,7 @@ const MyForm = () => {
               name="lastName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel>Last Name</FormLabel>
                   <FormControl>
                     <Input placeholder="Doe" {...field} />
                   </FormControl>
@@ -160,61 +151,14 @@ const MyForm = () => {
                 <FormItem>
                   <FormLabel>Experience</FormLabel>
                   <FormControl>
-                    <Popover>
-                      <PopoverTrigger asChild>
-                        <FormControl>
-                          <Button
-                            variant="outline"
-                            role="combobox"
-                            className={cn(
-                              "w-[200px] justify-between",
-                              !field.value && "text-muted-foreground",
-                            )}
-                          >
-                            {field.value
-                              ? experienceOptions.find(
-                                  (val) => val === field.value,
-                                )
-                              : "Select an option"}
-                            <ChevronsUpDown className="opacity-50" />
-                          </Button>
-                        </FormControl>
-                      </PopoverTrigger>
-                      <PopoverContent className="w-[200px] p-0">
-                        <Command>
-                          <CommandInput
-                            placeholder="Search options..."
-                            className="h-9"
-                          />
-                          <CommandList>
-                            <CommandEmpty>No framework found.</CommandEmpty>
-                            <CommandGroup>
-                              {experienceOptions.map((val) => (
-                                <CommandItem
-                                  className="cursor-pointer"
-                                  value={val}
-                                  key={val}
-                                  onSelect={() => {
-                                    form.setValue("experience", val);
-                                    form.resetField("other");
-                                  }}
-                                >
-                                  {val}
-                                  <Check
-                                    className={cn(
-                                      "ml-auto",
-                                      val === field.value
-                                        ? "opacity-100"
-                                        : "opacity-0",
-                                    )}
-                                  />
-                                </CommandItem>
-                              ))}
-                            </CommandGroup>
-                          </CommandList>
-                        </Command>
-                      </PopoverContent>
-                    </Popover>
+                    <ExperienceComboBox
+                      controlled={true}
+                      value={field.value}
+                      onSelect={(val) => {
+                        form.setValue("experience", val);
+                        form.resetField("other");
+                      }}
+                    />
                   </FormControl>
                   <FormDescription>How do you spell that?</FormDescription>
                   <FormMessage className="text-destructive dark:text-red-600" />
@@ -313,13 +257,6 @@ const MyForm = () => {
   );
 };
 
-const experienceOptions = [
-  "I loved this form",
-  "This form was ok",
-  "I did not like this form",
-  "Other",
-] as const;
-
 export const formSchema = z
   .object({
     email: z.string().email(),
@@ -327,10 +264,16 @@ export const formSchema = z
       .string()
       .min(6, "Password must be at least 6 characters")
       .max(20, "Password can not be more than 20 characters"),
-    firstName: z.string().min(2),
-    lastName: z.string().min(3),
+    firstName: z
+      .string({ required_error: "First Name is required" })
+      .trim()
+      .min(1, "First Name is required"),
+    lastName: z
+      .string({ required_error: "Last Name is required" })
+      .trim()
+      .min(1, "Last Name is required"),
     experience: z.enum(experienceOptions),
-    other: z.string().optional(),
+    other: z.string({ required_error: "Other is required" }).optional(),
   })
   .refine(
     (data) => {
