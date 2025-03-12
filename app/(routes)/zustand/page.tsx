@@ -46,13 +46,15 @@ export default function Page() {
               recommended to not use a single globally exported store. This is
               because NextJS with the introduction of RSC&apos;s does a lot of
               work on the server, pre-render.
+              <Link
+                className="text-sky-500 hover:text-sky-600"
+                href="https://zustand.docs.pmnd.rs/guides/nextjs"
+              >
+                {" "}
+                Read about the caveats
+              </Link>
             </p>
-            <Link
-              className="text-sky-500 hover:text-sky-600"
-              href="https://zustand.docs.pmnd.rs/guides/nextjs"
-            >
-              Read about the caveats
-            </Link>
+            <p>You can also persist the store into a storage mechanism.</p>
           </div>
         </div>
       </div>
