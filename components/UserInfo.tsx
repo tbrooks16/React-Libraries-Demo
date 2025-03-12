@@ -1,5 +1,4 @@
 "use client";
-import { useUserStore } from "@/lib/store";
 import {
   Card,
   CardContent,
@@ -7,6 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
+import { useUserStore } from "@/lib/providers";
 
 export const UserInfo = () => {
   const { email, firstName, lastName, password, other } = useUserStore(

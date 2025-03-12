@@ -1,22 +1,34 @@
 import { FormValues } from "@/components/ReactHookForm";
-import { create } from "zustand";
+import { createStore } from "zustand";
 
-type UserState = Omit<FormValues, "experience"> & {
+export type UserState = Omit<FormValues, "experience"> & {
+  experience: string;
+};
+
+export type UserStore = typeof initialState & {
   updateUser: (user: FormValues) => void;
 };
-export const useUserStore = create<UserState>()((set) => ({
+
+export const initialState: UserState = {
   email: "",
   firstName: "",
   lastName: "",
   password: "",
   other: "",
   experience: "",
-  updateUser: (user: FormValues) =>
-    set({
-      email: user.email,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      other: user.other,
-      password: user.password,
-    }),
-}));
+};
+
+export const initUserStore = (): UserState => initialState;
+
+export const createUserStore = (initState: UserState = initialState) =>
+  createStore<UserStore>()((set) => ({
+    ...initState,
+    updateUser: (user: FormValues) =>
+      set({
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        other: user.other,
+        password: user.password,
+      }),
+  }));
