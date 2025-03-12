@@ -44,9 +44,15 @@ export default function Page() {
               Zustand recommends having a single store that is exported
               throughout your whole application. However, in NextJS it is
               recommended to not use a single globally exported store. This is
-              because NextJS with the introduction of RSC's does a lot of work
-              on the server, pre-render.
+              because NextJS with the introduction of RSC&apos;s does a lot of
+              work on the server, pre-render.
             </p>
+            <Link
+              className="text-sky-500 hover:text-sky-600"
+              href="https://zustand.docs.pmnd.rs/guides/nextjs"
+            >
+              Read about the caveats
+            </Link>
           </div>
         </div>
       </div>

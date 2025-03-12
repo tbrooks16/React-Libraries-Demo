@@ -25,7 +25,6 @@ export default function Conversation({
   const [showDialog, setShowDialog] = useState(false);
 
   useEffect(() => {
-    console.log(messages.length);
     if (messages.length) setShowDialog(true);
   }, []);
   return (
@@ -73,12 +72,12 @@ export const Chat = ({
     <Card
       key={i}
       className={cn(
-        "p-4 gap-2 max-w-fit break-words my-4 hover:bg-card",
-        i % 2 === 0 && "ml-auto bg-primary-foreground",
-        className
+        "hover:bg-card my-4 max-w-fit gap-2 p-4 break-words",
+        i % 2 === 0 && "bg-primary-foreground ml-auto",
+        className,
       )}
     >
-      <CardHeader className="p-0 text-muted-foreground">
+      <CardHeader className="text-muted-foreground p-0">
         {i % 2 == 0 ? "You" : "Chatbot"}
       </CardHeader>
       <Separator />

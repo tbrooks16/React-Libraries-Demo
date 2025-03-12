@@ -40,7 +40,7 @@ export default function Chatbot() {
 
   const queryClient = useQueryClient();
 
-  let [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(0);
 
   const { mutate, isPending } = useMutation({
     mutationFn: sendMessage,

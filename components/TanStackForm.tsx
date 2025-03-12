@@ -26,7 +26,7 @@ import { motion, MotionConfig } from "motion/react";
 import { H3 } from "./ui/Headings";
 import { ExperienceComboBox, experienceOptions } from "./Combobox";
 import { NavigationButtons } from "./AnimatedButtons";
-import { useUserStore } from "@/lib/store";
+import { useUserStore } from "@/lib/providers";
 
 // Had problems importing modules from other files, so all colocated for now.
 
@@ -42,7 +42,7 @@ const TanstackInput = ({
   label: string;
   type?: HTMLInputTypeAttribute;
   placeholder: string;
-  errors: any[];
+  errors: unknown[];
   value: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   isTouched: boolean;
@@ -124,7 +124,7 @@ const Page1 = withForm({
   ...formOpts,
   validators: {
     // Needed because I'm reusing schema for both forms.
-    // @ts-ignore
+    // @ts-expect-error: Tanstack form doesn't accept enums
     onChange: formSchema,
   },
   render: function Render({ form }) {
@@ -166,7 +166,7 @@ const Page2 = withForm({
   ...formOpts,
   validators: {
     // Needed because I'm reusing schema for both forms.
-    // @ts-ignore
+    // @ts-expect-error: Tanstack form doesn't accept enums
     onChange: formSchema,
   },
   render: function Render({ form }) {
@@ -251,7 +251,7 @@ const Page3 = withForm({
   ...formOpts,
   validators: {
     // Needed because I'm reusing schema for both forms.
-    // @ts-ignore
+    // @ts-expect-error: Tanstack form doesn't accept enums
     onChange: formSchema,
   },
   render: function Render({ form }) {
@@ -303,7 +303,7 @@ const MyForm = () => {
     ...formOpts,
     validators: {
       // Pass a schema or function to validate
-      // @ts-ignore
+      // @ts-expect-error: Tanstack form doesn't accept enums
       onChange: formSchema,
     },
     onSubmit: ({ value }) => onSubmit(value as FormValues), // Assertion for compatibility
@@ -320,7 +320,7 @@ const MyForm = () => {
       case 2:
         return <Page3 form={form} />;
     }
-  }, [step]);
+  }, [step, form]);
 
   const { mutate } = useMutation({
     mutationFn: submitForm,
@@ -361,7 +361,7 @@ const MyForm = () => {
         </motion.div>
         <form.AppForm>
           <form.NavigationButtons
-            // @ts-ignore
+            // @ts-expect-error: I don't even know
             form={form}
             step={step}
             setStep={setStep}

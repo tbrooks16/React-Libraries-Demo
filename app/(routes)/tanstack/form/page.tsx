@@ -21,10 +21,11 @@ export default function Page() {
           </p>
           <div className="space-y-4">
             <p>
-              Tanstack Form is a very new library. So figuring it out it's way
-              of doing things was annoying. Feature wise I don't know if there's
-              any significant differences than with ReactHookForm. You'll find
-              way more resources and better examples with React Hook Form.
+              Tanstack Form is a very new library. So figuring it out it&apos;s
+              way of doing things was annoying. Feature wise I don&apos;t know
+              if there&apos;s any significant differences than with
+              ReactHookForm. You&apos;ll find way more resources and better
+              examples with React Hook Form.
             </p>
             <p>
               Functionally both forms follow a similar format and share the same
@@ -33,15 +34,15 @@ export default function Page() {
             <p>
               I had issues relocating components of this architecture to
               separate files due to the way everything is being imported. I
-              didn't do a deep dive into solving these issues, so most of the
-              code for this page is located in the TanStackForm.tsx file.
+              didn&apos;t do a deep dive into solving these issues, so most of
+              the code for this page is located in the TanStackForm.tsx file.
             </p>
             <Alert>
               <AlertTitle>Caveats</AlertTitle>
               <AlertDescription>
-                Tanstack Form doesn't cause re-renders when interacting with the
-                form. So you might find yourself trying to use a form or field
-                state value without success.
+                Tanstack Form doesn&apos;t cause re-renders when interacting
+                with the form. So you might find yourself trying to use a form
+                or field state value without success.
               </AlertDescription>
             </Alert>
             <p></p>

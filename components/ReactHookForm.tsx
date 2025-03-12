@@ -17,7 +17,7 @@ import { H3 } from "./ui/Headings";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useCallback, useMemo, useState, useTransition } from "react";
+import { useMemo, useState, useTransition } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { submitForm } from "@/app/clientApi/form";
 import { motion, MotionConfig } from "motion/react";
@@ -25,7 +25,7 @@ import { sleep } from "@/lib/utils";
 import { AnimatedFormWrapper, NavigationButtons } from "./AnimatedFormWrapper";
 import { toast } from "sonner";
 import { ExperienceComboBox, experienceOptions } from "./Combobox";
-import { useUserStore } from "@/lib/store";
+import { useUserStore } from "@/lib/providers";
 
 export const ReactHookForm = () => {
   return (
@@ -179,7 +179,7 @@ const MyForm = () => {
                       <Input placeholder="Type your response here" {...field} />
                     </FormControl>
                     <FormDescription>
-                      Tell me what you didn't like.
+                      Tell me what you didn&apos;t like.
                     </FormDescription>
                     <FormMessage className="text-destructive dark:text-red-600" />
                   </FormItem>
@@ -222,9 +222,9 @@ const MyForm = () => {
           </>
         );
       default:
-        return <>You Shouldn't be here...</>;
+        return <>You Shouldn&apos;t be here...</>;
     }
-  }, [step, experienceVal, otherVal]);
+  }, [step, experienceVal, otherVal, form]);
 
   const onSubmit = async (values: FormValues) => {
     startTransition(async () => {

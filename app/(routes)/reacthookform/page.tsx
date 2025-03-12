@@ -20,10 +20,10 @@ export default function Page() {
           </p>
           <div className="space-y-4">
             <p>
-              React Hook Form provides extensible API's to be able to interact
-              with the entire form submission process. In this form due to the
-              process being a series of steps, I am able to manually trigger
-              validation on select fields. For each step I only trigger
+              React Hook Form provides extensible API&apos;s to be able to
+              interact with the entire form submission process. In this form due
+              to the process being a series of steps, I am able to manually
+              trigger validation on select fields. For each step I only trigger
               validation for the controls on the page.
             </p>
             <p>
