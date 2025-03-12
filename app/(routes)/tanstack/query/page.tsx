@@ -5,8 +5,8 @@ import { Separator } from "@/components/ui/separator";
 
 export default function Page() {
   return (
-    <div className="m-10 flex gap-5">
-      <div className="relative my-4 w-1/2">
+    <>
+      <div>
         <div className="sticky top-24">
           <Alert>
             <AlertTitle>Look at the code</AlertTitle>
@@ -71,6 +71,6 @@ export default function Page() {
         </div>
       </div>
       <Chatbot />
-    </div>
+    </>
   );
 }
