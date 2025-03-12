@@ -26,6 +26,7 @@ import { motion, MotionConfig } from "motion/react";
 import { H3 } from "./ui/Headings";
 import { ExperienceComboBox, experienceOptions } from "./Combobox";
 import { NavigationButtons } from "./AnimatedButtons";
+import { useUserStore } from "@/lib/store";
 
 // Had problems importing modules from other files, so all colocated for now.
 
@@ -308,6 +309,8 @@ const MyForm = () => {
     onSubmit: ({ value }) => onSubmit(value as FormValues), // Assertion for compatibility
   });
 
+  const updateUserStore = useUserStore((state) => state.updateUser);
+
   const content = useMemo(() => {
     switch (step) {
       case 0:
@@ -326,6 +329,7 @@ const MyForm = () => {
       form.reset();
       setStep(0);
       setModifier(-1);
+      updateUserStore(variables);
     },
   });
 

@@ -13,7 +13,7 @@ export async function GET() {
     console.log(error);
     return NextResponse.json(
       { error: "Failed to retrieve messages" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

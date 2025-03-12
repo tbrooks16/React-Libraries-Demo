@@ -4,17 +4,31 @@ This is a demo of popular libraries I've used or am familiar with to reason on t
 
 Libraries used are:
 
+### Query Mechanisms
+
 - [Axios](https://axios-http.com/docs/intro) _HTTP Client_
 - [Tanstack Query](https://tanstack.com/query/latest) _State Management and HTTP Library_
-- [React Hook Form](https://react-hook-form.com) _Most popular form Library_
-- [React Router](https://reactrouter.com/home) _Routing Library_
-- [Tanstack Form](https://tanstack.com/form/latest) _Tanstack Form Library_
-- [Posthog](https://posthog.com) _Analytics Library_
-- [Zustand](https://zustand.docs.pmnd.rs/getting-started/introduction) _State Management Library_
 - [Prisma](https://www.prisma.io) _Relational ORM_
+
+### User Store
+
+- [React Router](https://reactrouter.com/home) _Routing Library_
+- [Zustand](https://zustand.docs.pmnd.rs/getting-started/introduction) _State Management Library_
+- [Tanstack Store](https://tanstack.com/store/latest) _State Management Library_
+
 - [Shadcn](https://ui.shadcn.com) _UI Component Library_
+
   - Uses [Radix UI](https://www.radix-ui.com) to build accessible components
+
+### Form
+
+- [React Hook Form](https://react-hook-form.com) _Most popular form Library_
+- [Tanstack Form](https://tanstack.com/form/latest) _Tanstack Form Library_
 - [Zod](https://zod.dev) or [Yup](https://github.com/jquense/yup) _Schema Validation Library_
+
+### Misc
+
+- [Posthog](https://posthog.com) _Analytics Library_
 - [Prettier](https://prettier.io) _Code styling_
 - [Motion](https://motion.dev) _Previously known as Framer Motion, Motion is an animation library._
 

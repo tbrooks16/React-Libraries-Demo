@@ -1,6 +1,7 @@
 import { generateRouteMap } from "@/actions/ServerActions";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { FillText } from "@/components/ui/FillText";
+import { UserInfo } from "@/components/UserInfo";
 import Link from "next/link";
 
 // This ensures the route generation only happens at build time
@@ -9,7 +10,6 @@ export const revalidate = 3600; // Revalidate every hour if needed
 export default async function Home() {
   // Routes are generated at build time
   const routes = await generateRouteMap();
-  console.log(routes);
 
   return (
     <main className="flex min-h-screen flex-col gap-3 p-24">
@@ -31,6 +31,7 @@ export default async function Home() {
           </Alert>
         ))}
       </div>
+      <UserInfo />
     </main>
   );
 }

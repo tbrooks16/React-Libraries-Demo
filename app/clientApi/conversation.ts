@@ -1,13 +1,13 @@
 import { SetStateAction } from "react";
+import axios from "axios";
+import { Message } from "@/components/Chatbot";
 
 export const fetchMessages = async () => {
-  const response = await fetch("/api/getmessages");
-  if (!response.ok) {
+  const response = await axios.get<Message[]>("/api/getmessages");
+  if (response.status > 299) {
     throw new Error("Network response was not ok");
   }
-  const json = await response.json();
-  // if (!isRefetching) setIndex(json.length === 0 ? 0 : json.length);
-  return json;
+  return response.data;
 };
 
 export const sendMessage = async ({

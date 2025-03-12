@@ -25,6 +25,7 @@ import { sleep } from "@/lib/utils";
 import { AnimatedFormWrapper, NavigationButtons } from "./AnimatedFormWrapper";
 import { toast } from "sonner";
 import { ExperienceComboBox, experienceOptions } from "./Combobox";
+import { useUserStore } from "@/lib/store";
 
 export const ReactHookForm = () => {
   return (
@@ -63,14 +64,16 @@ const MyForm = () => {
 
   const experienceVal = form.watch("experience");
   const otherVal = form.watch("other");
+  const updateUserStore = useUserStore((state) => state.updateUser);
 
-  const { mutate } = useMutation({
+  const { mutate } = useMutation<void, Error, FormValues>({
     mutationFn: submitForm,
     onSuccess(data, variables, context) {
       toast.success("Successful submission", { richColors: true });
       form.reset();
       setStep(0);
       setModifier(-1);
+      updateUserStore(variables);
     },
   });
 

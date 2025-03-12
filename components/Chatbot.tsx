@@ -89,6 +89,7 @@ export default function Chatbot() {
       {isPending && (
         <>
           <Chat animateEntry message={message} i={data!.length} />
+          {/* TODO Animate ..., stagger them and have them pop up and then down and run on a loop  */}
           <Chat
             animateEntry={false}
             className={streamedResponse ? "" : "animate-pulse opacity-50"}
