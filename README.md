@@ -1,79 +1,79 @@
 # React Library POC
 
-This is a demo of popular libraries I've used or am familiar with to reason on their viability in an ITS application.
+This repository demonstrates the use of popular libraries to evaluate their viability in an ITS application.
 
-Libraries used are:
+## Libraries Used
 
 ### Query Mechanisms
 
-- [Axios](https://axios-http.com/docs/intro) _HTTP Client_
-- [Tanstack Query](https://tanstack.com/query/latest) _State Management and HTTP Library_
-- [Prisma](https://www.prisma.io) _Relational ORM_
+- [Axios](https://axios-http.com/docs/intro): HTTP client for making network requests.
+- [Tanstack Query](https://tanstack.com/query/latest): State management and HTTP library for caching and query invalidation.
+- [Prisma](https://www.prisma.io): Relational ORM for server-side data fetching.
 
 ### User Store
 
-- [React Router](https://reactrouter.com/home) _Routing Library_
-- [Zustand](https://zustand.docs.pmnd.rs/getting-started/introduction) _State Management Library_
-- [Tanstack Store](https://tanstack.com/store/latest) _State Management Library_
+- [React Router](https://reactrouter.com/home): Routing library (not used in this repo).
+- [Zustand](https://zustand.docs.pmnd.rs/getting-started/introduction): State management library with middleware and persistence support.
+- [Tanstack Store](https://tanstack.com/store/latest): State management library (not used in this repo).
 
-- [Shadcn](https://ui.shadcn.com) _UI Component Library_
+### UI Components
 
-  - Uses [Radix UI](https://www.radix-ui.com) to build accessible components
+- [ShadCN](https://ui.shadcn.com): Customizable UI component library built with [Radix UI](https://www.radix-ui.com) for accessibility.
 
-### Form
+### Form Libraries
 
-- [React Hook Form](https://react-hook-form.com) _Most popular form Library_
-- [Tanstack Form](https://tanstack.com/form/latest) _Tanstack Form Library_
-- [Zod](https://zod.dev) or [Yup](https://github.com/jquense/yup) _Schema Validation Library_
+- [React Hook Form](https://react-hook-form.com): Popular form library for building forms.
+- [Tanstack Form](https://tanstack.com/form/latest): Form library by Tanstack.
+- [Zod](https://zod.dev) or [Yup](https://github.com/jquense/yup): Schema validation libraries.
 
-### Misc
+### Miscellaneous
 
-- [Posthog](https://posthog.com) _Analytics Library_
-- [Prettier](https://prettier.io) _Code styling_
-- [Motion](https://motion.dev) _Previously known as Framer Motion, Motion is an animation library._
+- [i18Next](https://www.i18next.com): Internationalization
+- [Posthog](https://posthog.com): Analytics library for user insights (not used in this repo).
+- [Prettier](https://prettier.io): Code styling tool.
+- [Motion](https://motion.dev): Animation library (formerly Framer Motion).
 
 ## Details
 
-- Axios is pretty self explanatory, it's an http client that is extensible allowing you to write interceptors, middleware, and much more.
-- Tanstack Query is a State Management and HTTP library. It does not make requests over the network but it does handle everything else. You can interop into the process before a request is sent, on success, and on error. You can cache data on the client and invalidate on a per query basis.
-- Prisma is an ORM, another popular library is Drizzle. These are good libraries to use if you are using a framework such as NextJS where you can fetch data on the server. I don't use it in this repo.
-- React Router is a routing library. I don't use it in this repo.
-- Zustand is a single store state management library. The API is very easy to understand and there is plenty of middleware to perform actions on the data. Data can also be persisted to a storage mechanism of your choice.
-- Tanstack Store is a state management library. It's not too mature yet so I don't use it in this repo.
-- ShadCN is a library full of customizable components. I use it all throughout this repo.
-- ReactHookForm is a form building library. Find out more on the ReactHookForm page.tsx.
-- Tanstack Form is a form building library. Find out more on the Tanstack/Form page.tsx.
-  - Zod is a validation library. I used Zod for the validation for both components.
-- Posthog is not used in this repo but it is an analytics library that is pretty interesting and can help with user insights.
-- I use Motion in this repo to make the form's look nice. :D
+- **Axios**: Extensible HTTP client with support for interceptors and middleware.
+- **Tanstack Query**: Handles state management and caching for network requests. Supports query invalidation and lifecycle hooks.
+- **Prisma**: ORM for relational databases, ideal for server-side frameworks like Next.js.
+- **Zustand**: Simple state management library with middleware and persistence capabilities.
+- **ShadCN**: Provides customizable and accessible UI components.
+- **React Hook Form**: Simplifies form creation and validation.
+- **Tanstack Form**: Alternative form library with Zod for validation.
+- **Motion**: Adds animations to enhance UI/UX.
 
 ## Getting Started
 
-First, run the development server:
+Follow these steps to run the project locally:
 
-> [!NOTE]
-> You need to have node installed to run this application.
+1. Install dependencies:
 
-```bash
-pnpm install
-# or
-npm install
------
-pnpm dev
-# or
-npm run dev
-```
+   ```bash
+   pnpm install
+   # or
+   npm install
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Start the development server:
+
+   ```bash
+   pnpm dev
+   # or
+   npm run dev
+   ```
+
+3. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+Explore the following resources to learn more about Next.js:
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- [the Next.js GitHub repository](https://github.com/vercel/next.js) Contribute and provide feedback.
 
 ## Deploy on Vercel
 
