@@ -2,13 +2,21 @@
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { createContext, useContext, useRef } from "react";
+import { createContext, useContext, useEffect, useRef } from "react";
 import { createUserStore, initUserStore, UserStore } from "./store";
 import { useStore } from "zustand";
+import { dir } from "i18next";
 
 const queryClient = new QueryClient();
 
 export default function Providers({ children }: { children: React.ReactNode }) {
+  const { language } = useUserStore((state) => state);
+
+  useEffect(() => {
+    document.documentElement.lang = language;
+    document.documentElement.dir = dir(language);
+  }, [language]);
+
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
