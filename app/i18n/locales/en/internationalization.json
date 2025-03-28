@@ -1,0 +1,24 @@
+{
+  "lookAtCode": "Look at the code",
+  "checkComponent": "Check out the code for this component in internationalization/page.tsx",
+  "title": "Internationalization",
+  "setup": "Setting up i18n was relatively easy. Because this project uses NextJS however there was a different setup than would be with a regular react app.",
+  "features": "This project uses the library i18next to set up localization. It comes with a bunch of very cool features.",
+  "featureList": {
+    "interpolation": "Interpolation",
+    "pluralization": "Pluralization",
+    "dynamicFetch": "Dynamic resource fetching"
+  },
+  "caveat": {
+    "title": "Caveats",
+    "description": "One thing to note is setup for NextJS is quite more complicated than a vanilla react app."
+  },
+  "howItWorks": {
+    "title": "How it works",
+    "description": "Setup works by first defining your resource files. In this app they're defined in the i18n/locales folder. Then you provide the connection to the resources, they could be in the public folder, in a folder in the project, hosted on a cdn somewhere, the decision is up to you. The i18n library provides many options to configure this.",
+    "vanillaNote": "In a vanilla react project you want to make sure you import your i18n file."
+  },
+  "disclaimer": "I wouldn't look too hard into the code here, I just wanted to get something working. A vanilla react version would have much cleaner code",
+  "readMore": "Read more about the setup for",
+  "or": "or"
+}

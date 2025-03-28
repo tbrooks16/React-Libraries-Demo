@@ -1,0 +1,75 @@
+{
+  "lookAtCode": "Look at the code",
+  "checkComponent": "Check out the code for the form in ReactHookForm.tsx",
+  "title": "ReactHookForm",
+  "intro": "This is a simple demonstration of a form using React Hook Form. Type an email and password to move onto the next form step.",
+  "description": {
+    "validation": "React Hook Form provides extensible API's to be able to interact with the entire form submission process. In this form due to the process being a series of steps, I am able to manually trigger validation on select fields. For each step I only trigger validation for the controls on the page.",
+    "conditional": "I also conditionally require the other field if the chosen selection is other."
+  },
+  "form": {
+    "cardTitle": "A Simple Form",
+    "cardDescription": "Please fill out the form or you will be fired",
+    "email": {
+      "label": "Email",
+      "placeholder": "test@test.com",
+      "description": "Your email address"
+    },
+    "password": {
+      "label": "Password",
+      "placeholder": "******",
+      "description": "Your super secret password"
+    },
+    "firstName": {
+      "label": "First Name",
+      "placeholder": "John",
+      "description": "Wow what a name!"
+    },
+    "lastName": {
+      "label": "Last Name",
+      "placeholder": "Doe",
+      "description": "How do you spell that?"
+    },
+    "experience": {
+      "label": "Experience",
+      "description": "Tell us about your experience",
+      "options": {
+        "loved": "I loved this form",
+        "ok": "This form was ok",
+        "disliked": "I did not like this form",
+        "other": "Other"
+      }
+    },
+    "other": {
+      "label": "Other",
+      "placeholder": "Type your response here",
+      "description": "Tell me what you didn't like"
+    },
+    "summary": {
+      "title": "Summary",
+      "description": "Please review your submission before sending"
+    }
+  },
+  "errors": {
+    "email": {
+      "invalid": "Please enter a valid email address"
+    },
+    "password": {
+      "min": "Password must be at least 6 characters",
+      "max": "Password cannot be more than 20 characters"
+    },
+    "firstName": {
+      "required": "First Name is required"
+    },
+    "lastName": {
+      "required": "Last Name is required"
+    },
+    "experience": {
+      "required": "Experience is required"
+    },
+    "other": {
+      "required": "Other is required",
+      "conditional": "Other is required when experience is Other"
+    }
+  }
+}

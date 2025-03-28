@@ -1,0 +1,15 @@
+{
+  "lookAtCode": "Look at the code",
+  "checkComponent": "Check out the code for the form in TanStackForm.tsx",
+  "title": "TanStack Form",
+  "intro": "This is a simple demonstration of a form using the newly released TanStack Form. Type an email and password to move onto the next form step.",
+  "description": {
+    "newLibrary": "Tanstack Form is a very new library. So figuring it out it's way of doing things was annoying. Feature wise I don't know if there's any significant differences than with ReactHookForm. You'll find way more resources and better examples with React Hook Form.",
+    "similarity": "Functionally both forms follow a similar format and share the same form schema.",
+    "architecture": "I had issues relocating components of this architecture to separate files due to the way everything is being imported. I didn't do a deep dive into solving these issues, so most of the code for this page is located in the TanStackForm.tsx file."
+  },
+  "caveat": {
+    "title": "Caveats",
+    "description": "Tanstack Form doesn't cause re-renders when interacting with the form. So you might find yourself trying to use a form or field state value without success."
+  }
+}

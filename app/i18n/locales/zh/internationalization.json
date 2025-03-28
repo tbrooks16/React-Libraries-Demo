@@ -1,0 +1,24 @@
+{
+  "lookAtCode": "查看代码",
+  "checkComponent": "在 internationalization/page.tsx 中查看此组件的代码",
+  "title": "国际化",
+  "setup": "设置 i18n 相对容易。但是因为这个项目使用 NextJS，所以设置与普通的 React 应用程序不同。",
+  "features": "这个项目使用 i18next 库来设置本地化。它带有许多非常酷的功能。",
+  "featureList": {
+    "interpolation": "插值",
+    "pluralization": "复数形式",
+    "dynamicFetch": "动态资源获取"
+  },
+  "caveat": {
+    "title": "注意事项",
+    "description": "需要注意的是，NextJS 的设置比普通的 React 应用程序要复杂得多。"
+  },
+  "howItWorks": {
+    "title": "工作原理",
+    "description": "设置首先要定义资源文件。在这个应用程序中，它们定义在 i18n/locales 文件夹中。然后提供与资源的连接，可以在公共文件夹中，在项目文件夹中，或者在某个 CDN 上托管，由你决定。i18n 库提供了许多配置选项。",
+    "vanillaNote": "在普通的 React 项目中，你需要确保导入你的 i18n 文件。"
+  },
+  "disclaimer": "不要太过关注这里的代码，我只是想让它能工作。普通的 React 版本会有更清晰的代码",
+  "readMore": "了解更多关于设置的信息",
+  "or": "或者"
+}

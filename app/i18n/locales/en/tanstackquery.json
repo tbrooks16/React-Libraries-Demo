@@ -1,0 +1,26 @@
+{
+  "lookAtCode": "Look at the code",
+  "checkComponent": "Check out the code for the chatbot in Chatbot.tsx",
+  "title": "Tanstack Query",
+  "intro": "This is a simple demonstration of Tanstack Query. Ask the bot questions and it will respond with an answer from the database.",
+  "freshStart": {
+    "title": "Fresh Start",
+    "description": "When you open this page for the first time, it makes a client side request to the backend requesting the conversation history.",
+    "empty": "It will return an empty array because you have no conversation history."
+  },
+  "storedData": {
+    "title": "Stored Data",
+    "description": "When you visit the page and have a conversation history, it will return the data and ask if you want to continue your conversation."
+  },
+  "caching": {
+    "description": "Every time you send a message the conversation is re-fetched and cached on the client for two minutes. When you navigate away from the page and come back within two minutes the data will be served from the cache instead of making a request to the server. After the two minutes the data will be considered stale. Any cached queries that have a stale status will be re-fetched when triggered."
+  },
+  "opportunities": {
+    "intro": "I believe Tanstack Query is very powerful and there are massive opportunities to use it with the AI application. Here are some contexts I think it will be useful in.",
+    "features": {
+      "caching": "Caching conversation history",
+      "retries": "Automatic retries on post requests",
+      "fetching": "Uniform and dry data fetching model"
+    }
+  }
+}

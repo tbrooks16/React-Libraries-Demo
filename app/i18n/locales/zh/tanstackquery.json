@@ -1,0 +1,26 @@
+{
+  "lookAtCode": "查看代码",
+  "checkComponent": "在 Chatbot.tsx 中查看聊天机器人的代码",
+  "title": "Tanstack Query",
+  "intro": "这是 Tanstack Query 的简单演示。向机器人提问，它会从数据库中返回答案。",
+  "freshStart": {
+    "title": "全新开始",
+    "description": "当您第一次打开此页面时，它会向后端发送客户端请求，请求对话历史记录。",
+    "empty": "由于您没有对话历史记录，它将返回一个空数组。"
+  },
+  "storedData": {
+    "title": "存储的数据",
+    "description": "当您访问页面并有对话历史记录时，它将返回数据并询问您是否要继续对话。"
+  },
+  "caching": {
+    "description": "每次您发送消息时，对话都会重新获取并在客户端缓存两分钟。当您离开页面并在两分钟内返回时，数据将从缓存中提供，而不是向服务器发出请求。两分钟后，数据将被视为过期。任何状态为过期的缓存查询在触发时都会重新获取。"
+  },
+  "opportunities": {
+    "intro": "我认为 Tanstack Query 非常强大，在 AI 应用程序中有很多使用机会。以下是我认为它会有用的一些场景。",
+    "features": {
+      "caching": "缓存对话历史",
+      "retries": "自动重试 POST 请求",
+      "fetching": "统一和简洁的数据获取模型"
+    }
+  }
+}

@@ -24,33 +24,47 @@ import { motion, MotionConfig } from "motion/react";
 import { sleep } from "@/lib/utils";
 import { AnimatedFormWrapper, NavigationButtons } from "./AnimatedFormWrapper";
 import { toast } from "sonner";
-import { ExperienceComboBox, experienceOptions } from "./Combobox";
+import { CustomCombobox as ExperienceCombobox } from "./Combobox";
 import { useUserStore } from "@/lib/providers";
+import { useParams } from "next/navigation";
+import { useTranslation } from "@/app/i18n/client";
 
-export const ReactHookForm = () => {
+export const ReactHookForm = ({ lng }: { lng: string }) => {
+  const params = useParams();
+  const { t } = useTranslation(lng, "reacthookform");
+
   return (
     <Card className="grow">
       <CardHeader>
-        <CardTitle>A Simple Form</CardTitle>
-        <CardDescription>
-          Please fill out the form or you will be fired.
-        </CardDescription>
+        <CardTitle>{t("form.cardTitle")}</CardTitle>
+        <CardDescription>{t("form.cardDescription")}</CardDescription>
       </CardHeader>
       <MotionConfig transition={{ duration: 0.6, type: "spring", bounce: 0 }}>
-        <MyForm />
+        <MyForm lng={lng} />
       </MotionConfig>
     </Card>
   );
 };
 
-const MyForm = () => {
+const getExperienceOptions = (t: any) =>
+  [
+    t("form.experience.options.loved"),
+    t("form.experience.options.ok"),
+    t("form.experience.options.disliked"),
+    t("form.experience.options.other"),
+  ] as const;
+
+const MyForm = ({ lng }: { lng: string }) => {
+  const { t } = useTranslation(lng, "reacthookform");
+  const experienceOptions = getExperienceOptions(t);
+
   const [step, setStep] = useState(0);
 
   const [isPending, startTransition] = useTransition();
   const [modifier, setModifier] = useState(1);
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<ReturnType<typeof createFormSchema>>>({
+    resolver: zodResolver(createFormSchema(t)),
     defaultValues: {
       email: "",
       password: "",
@@ -87,15 +101,17 @@ const MyForm = () => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>{t("form.email.label")}</FormLabel>
                   <FormControl>
                     <Input
                       type="email"
-                      placeholder="test@test.com"
+                      placeholder={t("form.email.placeholder")}
                       {...field}
                     />
                   </FormControl>
-                  <FormDescription>Your email address</FormDescription>
+                  <FormDescription>
+                    {t("form.email.description")}
+                  </FormDescription>
                   <FormMessage className="text-destructive dark:text-red-600" />
                 </FormItem>
               )}
@@ -105,11 +121,17 @@ const MyForm = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel>{t("form.password.label")}</FormLabel>
                   <FormControl>
-                    <Input type="password" placeholder="******" {...field} />
+                    <Input
+                      type="password"
+                      placeholder={t("form.password.placeholder")}
+                      {...field}
+                    />
                   </FormControl>
-                  <FormDescription>Your super secret password</FormDescription>
+                  <FormDescription>
+                    {t("form.password.description")}
+                  </FormDescription>
                   <FormMessage className="text-destructive dark:text-red-600" />
                 </FormItem>
               )}
@@ -124,11 +146,16 @@ const MyForm = () => {
               name="firstName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>First Name</FormLabel>
+                  <FormLabel>{t("form.firstName.label")}</FormLabel>
                   <FormControl>
-                    <Input placeholder="John" {...field} />
+                    <Input
+                      placeholder={t("form.firstName.placeholder")}
+                      {...field}
+                    />
                   </FormControl>
-                  <FormDescription>Wow what a name!</FormDescription>
+                  <FormDescription>
+                    {t("form.firstName.description")}
+                  </FormDescription>
                   <FormMessage className="text-destructive dark:text-red-600" />
                 </FormItem>
               )}
@@ -138,11 +165,16 @@ const MyForm = () => {
               name="lastName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Last Name</FormLabel>
+                  <FormLabel>{t("form.lastName.label")}</FormLabel>
                   <FormControl>
-                    <Input placeholder="Doe" {...field} />
+                    <Input
+                      placeholder={t("form.lastName.placeholder")}
+                      {...field}
+                    />
                   </FormControl>
-                  <FormDescription>How do you spell that?</FormDescription>
+                  <FormDescription>
+                    {t("form.lastName.description")}
+                  </FormDescription>
                   <FormMessage className="text-destructive dark:text-red-600" />
                 </FormItem>
               )}
@@ -152,18 +184,24 @@ const MyForm = () => {
               name="experience"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Experience</FormLabel>
+                  <FormLabel>{t("form.experience.label")}</FormLabel>
                   <FormControl>
-                    <ExperienceComboBox
+                    <ExperienceCombobox
+                      options={experienceOptions}
                       controlled={true}
                       value={field.value}
                       onSelect={(val) => {
-                        form.setValue("experience", val);
+                        form.setValue(
+                          "experience",
+                          val as (typeof experienceOptions)[number],
+                        );
                         form.resetField("other");
                       }}
                     />
                   </FormControl>
-                  <FormDescription>How do you spell that?</FormDescription>
+                  <FormDescription>
+                    {t("form.experience.description")}
+                  </FormDescription>
                   <FormMessage className="text-destructive dark:text-red-600" />
                 </FormItem>
               )}
@@ -174,12 +212,15 @@ const MyForm = () => {
                 name="other"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Other</FormLabel>
+                    <FormLabel>{t("form.other.label")}</FormLabel>
                     <FormControl>
-                      <Input placeholder="Type your response here" {...field} />
+                      <Input
+                        placeholder={t("form.other.placeholder")}
+                        {...field}
+                      />
                     </FormControl>
                     <FormDescription>
-                      Tell me what you didn&apos;t like.
+                      {t("form.other.description")}
                     </FormDescription>
                     <FormMessage className="text-destructive dark:text-red-600" />
                   </FormItem>
@@ -194,37 +235,36 @@ const MyForm = () => {
         return (
           <>
             <div>
-              <H3>Summary</H3>
+              <H3>{t("form.summary.title")}</H3>
               <div className="text-muted-foreground text-sm">
-                Please review your submission before sending
+                {t("form.summary.description")}
               </div>
             </div>
             <div className="space-y-2">
-              <div>First Name</div>
+              <div>{t("form.firstName.label")}</div>
               <div className="text-muted-foreground text-sm">{firstName}</div>
-              <div>Last Name</div>
+              <div>{t("form.lastName.label")}</div>
               <div className="text-muted-foreground text-sm">{lastName}</div>
-              <div>Email</div>
+              <div>{t("form.email.label")}</div>
               <div className="text-muted-foreground text-sm">{email}</div>
-              <div>Password</div>
-              <div className="text-muted-foreground text-sm">
-                {new Array(password.length).fill("*").join("")}
-              </div>
-              <div>Experience</div>
-              <div className="text-muted-foreground text-sm">{experience}</div>
-              {other && (
-                <>
-                  <div>Other</div>
-                  <div className="text-muted-foreground text-sm">{other}</div>
-                </>
-              )}
+              <div>{t("form.password.label")}</div>
+              <div className="text-muted-foreground text-sm"></div>
+              {new Array(password.length).fill("*").join("")}
             </div>
+            <div>{t("form.experience.label")}</div>
+            <div className="text-muted-foreground text-sm">{experience}</div>
+            {other && (
+              <>
+                <div>{t("form.other.label")}</div>
+                <div className="text-muted-foreground text-sm">{other}</div>
+              </>
+            )}
           </>
         );
       default:
         return <>You Shouldn&apos;t be here...</>;
     }
-  }, [step, experienceVal, otherVal, form]);
+  }, [step, experienceVal, otherVal, form, t]);
 
   const onSubmit = async (values: FormValues) => {
     startTransition(async () => {
@@ -259,38 +299,45 @@ const MyForm = () => {
     </AnimatedFormWrapper>
   );
 };
+export const experienceOptions = [
+  "I loved this form",
+  "This form was ok",
+  "I did not like this form",
+  "Other",
+] as const;
 
-export const formSchema = z
-  .object({
-    email: z.string().email(),
-    password: z
-      .string()
-      .min(6, "Password must be at least 6 characters")
-      .max(20, "Password can not be more than 20 characters"),
-    firstName: z
-      .string({ required_error: "First Name is required" })
-      .trim()
-      .min(1, "First Name is required"),
-    lastName: z
-      .string({ required_error: "Last Name is required" })
-      .trim()
-      .min(1, "Last Name is required"),
-    experience: z.enum(experienceOptions, {
-      message: "Experience is required",
-    }),
-    other: z.string({ required_error: "Other is required" }).optional(),
-  })
-  .refine(
-    (data) => {
-      // Require other if experience === Other
-      if (data.experience === "Other") return !!data.other;
+export const createFormSchema = (t: any) =>
+  z
+    .object({
+      email: z.string().email(t("errors.email.invalid")),
+      password: z
+        .string()
+        .min(6, t("errors.password.min"))
+        .max(20, t("errors.password.max")),
+      firstName: z
+        .string({ required_error: t("errors.firstName.required") })
+        .trim()
+        .min(1, t("errors.firstName.required")),
+      lastName: z
+        .string({ required_error: t("errors.lastName.required") })
+        .trim()
+        .min(1, t("errors.lastName.required")),
+      experience: z.enum(experienceOptions, {
+        message: t("errors.experience.required"),
+      }),
+      other: z
+        .string({ required_error: t("errors.other.required") })
+        .optional(),
+    })
+    .refine(
+      (data) => {
+        if (data.experience === "Other") return !!data.other;
+        return true;
+      },
+      {
+        message: t("errors.other.conditional"),
+        path: ["other"],
+      },
+    );
 
-      return true;
-    },
-    {
-      message: "Other is required when experience is Other",
-      path: ["other"],
-    },
-  );
-
-export type FormValues = z.infer<typeof formSchema>;
+export type FormValues = z.infer<ReturnType<typeof createFormSchema>>;

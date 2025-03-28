@@ -1,0 +1,26 @@
+{
+  "lookAtCode": "Guarda il codice",
+  "checkComponent": "Controlla il codice del chatbot in Chatbot.tsx",
+  "title": "Tanstack Query",
+  "intro": "Questa è una semplice dimostrazione di Tanstack Query. Fai domande al bot e risponderà con una risposta dal database.",
+  "freshStart": {
+    "title": "Nuovo Inizio",
+    "description": "Quando apri questa pagina per la prima volta, viene effettuata una richiesta lato client al backend per richiedere la cronologia della conversazione.",
+    "empty": "Restituirà un array vuoto perché non hai cronologia delle conversazioni."
+  },
+  "storedData": {
+    "title": "Dati Memorizzati",
+    "description": "Quando visiti la pagina e hai una cronologia delle conversazioni, restituirà i dati e chiederà se vuoi continuare la tua conversazione."
+  },
+  "caching": {
+    "description": "Ogni volta che invii un messaggio, la conversazione viene recuperata nuovamente e memorizzata nella cache del client per due minuti. Quando ti allontani dalla pagina e torni entro due minuti, i dati verranno serviti dalla cache invece di effettuare una richiesta al server. Dopo i due minuti, i dati saranno considerati obsoleti. Qualsiasi query memorizzata nella cache con stato obsoleto verrà recuperata nuovamente quando attivata."
+  },
+  "opportunities": {
+    "intro": "Credo che Tanstack Query sia molto potente e ci siano enormi opportunità per utilizzarlo con l'applicazione AI. Ecco alcuni contesti in cui penso sarà utile.",
+    "features": {
+      "caching": "Memorizzazione nella cache della cronologia delle conversazioni",
+      "retries": "Tentativi automatici sulle richieste post",
+      "fetching": "Modello di recupero dati uniforme e asciutto"
+    }
+  }
+}

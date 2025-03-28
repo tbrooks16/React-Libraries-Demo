@@ -1,0 +1,75 @@
+{
+  "lookAtCode": "查看代码",
+  "checkComponent": "在 ReactHookForm.tsx 中查看表单代码",
+  "title": "React Hook 表单",
+  "intro": "这是使用 React Hook Form 的简单表单演示。输入电子邮件和密码以进入下一个表单步骤。",
+  "description": {
+    "validation": "React Hook Form 提供可扩展的 API，能够与整个表单提交过程进行交互。在这个表单中，由于过程是一系列步骤，我可以在选定字段上手动触发验证。",
+    "conditional": "如果选择的是\"其他\"选项，我还会有条件地要求填写其他字段。"
+  },
+  "form": {
+    "cardTitle": "简单表单",
+    "cardDescription": "请填写表单，否则您将被解雇",
+    "email": {
+      "label": "电子邮件",
+      "placeholder": "test@test.com",
+      "description": "您的电子邮件地址"
+    },
+    "password": {
+      "label": "密码",
+      "placeholder": "******",
+      "description": "您的超级秘密密码"
+    },
+    "firstName": {
+      "label": "名字",
+      "placeholder": "小明",
+      "description": "好棒的名字！"
+    },
+    "lastName": {
+      "label": "姓氏",
+      "placeholder": "张",
+      "description": "怎么拼写？"
+    },
+    "experience": {
+      "label": "体验",
+      "description": "告诉我们您的体验",
+      "options": {
+        "loved": "我喜欢这个表单",
+        "ok": "这个表单还可以",
+        "disliked": "我不喜欢这个表单",
+        "other": "其他"
+      }
+    },
+    "other": {
+      "label": "其他",
+      "placeholder": "在这里输入您的回答",
+      "description": "告诉我您不喜欢什么"
+    },
+    "summary": {
+      "title": "摘要",
+      "description": "请在提交前检查您的信息"
+    }
+  },
+  "errors": {
+    "email": {
+      "invalid": "请输入有效的电子邮件地址"
+    },
+    "password": {
+      "min": "密码至少需要6个字符",
+      "max": "密码不能超过20个字符"
+    },
+    "firstName": {
+      "required": "名字是必填项"
+    },
+    "lastName": {
+      "required": "姓氏是必填项"
+    },
+    "experience": {
+      "required": "体验是必填项"
+    },
+    "other": {
+      "required": "其他是必填项",
+      "conditional": "当体验选择\"其他\"时，此项为必填"
+    }
+  }
+}

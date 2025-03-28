@@ -8,7 +8,11 @@ import {
   useStore,
 } from "@tanstack/react-form";
 import { Input } from "./ui/input";
-import { formSchema, FormValues } from "./ReactHookForm";
+import {
+  createFormSchema,
+  experienceOptions,
+  FormValues,
+} from "./ReactHookForm";
 import { sleep } from "@/lib/utils";
 import {
   ChangeEvent,
@@ -24,9 +28,44 @@ import { Label } from "./ui/label";
 import { Card, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { motion, MotionConfig } from "motion/react";
 import { H3 } from "./ui/Headings";
-import { ExperienceComboBox, experienceOptions } from "./Combobox";
+import { CustomCombobox as ExperienceCombobox } from "./Combobox";
 import { NavigationButtons } from "./AnimatedButtons";
 import { useUserStore } from "@/lib/providers";
+import { z } from "zod";
+import { useTranslation } from "@/app/i18n/client";
+
+export const formSchema = z
+  .object({
+    email: z.string().email(),
+    password: z
+      .string()
+      .min(6, "Password must be at least 6 characters")
+      .max(20, "Password can not be more than 20 characters"),
+    firstName: z
+      .string({ required_error: "First Name is required" })
+      .trim()
+      .min(1, "First Name is required"),
+    lastName: z
+      .string({ required_error: "Last Name is required" })
+      .trim()
+      .min(1, "Last Name is required"),
+    experience: z.enum(experienceOptions, {
+      message: "Experience is required",
+    }),
+    other: z.string({ required_error: "Other is required" }).optional(),
+  })
+  .refine(
+    (data) => {
+      // Require other if experience === Other
+      if (data.experience === "Other") return !!data.other;
+
+      return true;
+    },
+    {
+      message: "Other is required when experience is Other",
+      path: ["other"],
+    },
+  );
 
 // Had problems importing modules from other files, so all colocated for now.
 
@@ -86,7 +125,7 @@ const { fieldContext, formContext } = createFormHookContexts();
 const { useAppForm, withForm } = createFormHook({
   fieldComponents: {
     TanstackInput,
-    ExperienceComboBox,
+    ExperienceCombobox,
   },
   formComponents: {
     NavigationButtons,
@@ -95,19 +134,21 @@ const { useAppForm, withForm } = createFormHook({
   formContext,
 });
 
-export const TanStackForm = () => (
-  <Card className="grow">
-    <CardHeader>
-      <CardTitle>A Simple Form</CardTitle>
-      <CardDescription>
-        Please fill out the form or you will be fired.
-      </CardDescription>
-    </CardHeader>
-    <MotionConfig transition={{ duration: 0.6, type: "spring", bounce: 0 }}>
-      <MyForm />
-    </MotionConfig>
-  </Card>
-);
+export const TanStackForm = ({ lng }: { lng: string }) => {
+  const { t } = useTranslation(lng, "reacthookform");
+
+  return (
+    <Card className="grow">
+      <CardHeader>
+        <CardTitle>{t("form.cardTitle")}</CardTitle>
+        <CardDescription>{t("form.cardDescription")}</CardDescription>
+      </CardHeader>
+      <MotionConfig transition={{ duration: 0.6, type: "spring", bounce: 0 }}>
+        <MyForm lng={lng} />
+      </MotionConfig>
+    </Card>
+  );
+};
 
 const formOpts = formOptions({
   defaultValues: {
@@ -123,11 +164,15 @@ const formOpts = formOptions({
 const Page1 = withForm({
   ...formOpts,
   validators: {
-    // Needed because I'm reusing schema for both forms.
-    // @ts-expect-error: Tanstack form doesn't accept enums
+    // @ts-expect-error Translation changes
     onChange: formSchema,
   },
-  render: function Render({ form }) {
+  props: {
+    lng: "",
+  },
+  render: function Render({ form, lng }) {
+    const { t } = useTranslation(lng, "reacthookform");
+
     return (
       <>
         <form.AppField
@@ -136,8 +181,8 @@ const Page1 = withForm({
             <field.TanstackInput
               value={field.state.value}
               onChange={(e) => field.handleChange(e.target.value)}
-              label="Email"
-              placeholder="test@test.com"
+              label={t("form.email.label")}
+              placeholder={t("form.email.placeholder")}
               errors={field.state.meta.errors}
               isTouched={field.state.meta.isTouched}
             />
@@ -150,8 +195,8 @@ const Page1 = withForm({
               value={field.state.value}
               onChange={(e) => field.handleChange(e.target.value)}
               type="password"
-              label="Password"
-              placeholder="******"
+              label={t("form.password.label")}
+              placeholder={t("form.password.placeholder")}
               errors={field.state.meta.errors}
               isTouched={field.state.meta.isTouched}
             />
@@ -165,14 +210,16 @@ const Page1 = withForm({
 const Page2 = withForm({
   ...formOpts,
   validators: {
-    // Needed because I'm reusing schema for both forms.
-    // @ts-expect-error: Tanstack form doesn't accept enums
+    // @ts-expect-error Translation changes
     onChange: formSchema,
   },
-  render: function Render({ form }) {
-    // Subscribe to errors to rerender
-    // Experience message wasn't popping up when validation occurred.
+  props: {
+    lng: "",
+  },
+  render: function Render({ form, lng }) {
+    const { t } = useTranslation(lng, "reacthookform");
     useStore(form.store, (state) => state.errors);
+
     return (
       <>
         <form.AppField
@@ -181,8 +228,8 @@ const Page2 = withForm({
             <field.TanstackInput
               value={field.state.value}
               onChange={(e) => field.handleChange(e.target.value)}
-              label="First Name"
-              placeholder="John"
+              label={t("form.firstName.label")}
+              placeholder={t("form.firstName.placeholder")}
               errors={field.state.meta.errors}
               isTouched={field.state.meta.isTouched}
             />
@@ -194,18 +241,19 @@ const Page2 = withForm({
             <field.TanstackInput
               value={field.state.value}
               onChange={(e) => field.handleChange(e.target.value)}
-              label="Last Name"
-              placeholder="Doe"
+              label={t("form.lastName.label")}
+              placeholder={t("form.lastName.placeholder")}
               errors={field.state.meta.errors}
               isTouched={field.state.meta.isTouched}
             />
           )}
         />
-        <Label>Experience</Label>
+        <Label>{t("form.experience.label")}</Label>
         <form.AppField
           name="experience"
           children={(field) => (
-            <field.ExperienceComboBox
+            <field.ExperienceCombobox
+              options={experienceOptions}
               controlled={false}
               value={
                 (form.state.values.experience ||
@@ -234,8 +282,8 @@ const Page2 = withForm({
               <field.TanstackInput
                 value={field.state.value}
                 onChange={(e) => field.handleChange(e.target.value)}
-                label="Other"
-                placeholder="Type your response here..."
+                label={t("form.other.label")}
+                placeholder={t("form.other.placeholder")}
                 errors={field.state.meta.errors}
                 isTouched={field.state.meta.isTouched}
               />
@@ -250,63 +298,65 @@ const Page2 = withForm({
 const Page3 = withForm({
   ...formOpts,
   validators: {
-    // Needed because I'm reusing schema for both forms.
-    // @ts-expect-error: Tanstack form doesn't accept enums
+    // @ts-expect-error Translation changes
     onChange: formSchema,
   },
-  render: function Render({ form }) {
+  props: {
+    lng: "",
+  },
+  render: function Render({ form, lng }) {
+    const { t } = useTranslation(lng, "reacthookform");
     const { firstName, lastName, email, password, experience, other } =
       form.state.values;
+
     return (
       <>
-        <>
-          <div>
-            <H3>Summary</H3>
-            <div className="text-muted-foreground text-sm">
-              Please review your submission before sending
-            </div>
+        <div>
+          <H3>{t("form.summary.title")}</H3>
+          <div className="text-muted-foreground text-sm">
+            {t("form.summary.description")}
           </div>
-          <div className="space-y-2">
-            <div>First Name</div>
-            <div className="text-muted-foreground text-sm">{firstName}</div>
-            <div>Last Name</div>
-            <div className="text-muted-foreground text-sm">{lastName}</div>
-            <div>Email</div>
-            <div className="text-muted-foreground text-sm">{email}</div>
-            <div>Password</div>
-            <div className="text-muted-foreground text-sm">
-              {new Array(password.length).fill("*").join("")}
-            </div>
-            <div>Experience</div>
-            <div className="text-muted-foreground text-sm">{experience}</div>
-            {other && (
-              <>
-                <div>Other</div>
-                <div className="text-muted-foreground text-sm">{other}</div>
-              </>
-            )}
+        </div>
+        <div className="space-y-2">
+          <div>{t("form.firstName.label")}</div>
+          <div className="text-muted-foreground text-sm">{firstName}</div>
+          <div>{t("form.lastName.label")}</div>
+          <div className="text-muted-foreground text-sm">{lastName}</div>
+          <div>{t("form.email.label")}</div>
+          <div className="text-muted-foreground text-sm">{email}</div>
+          <div>{t("form.password.label")}</div>
+          <div className="text-muted-foreground text-sm">
+            {new Array(password.length).fill("*").join("")}
           </div>
-        </>
+          <div>{t("form.experience.label")}</div>
+          <div className="text-muted-foreground text-sm">{experience}</div>
+          {other && (
+            <>
+              <div>{t("form.other.label")}</div>
+              <div className="text-muted-foreground text-sm">{other}</div>
+            </>
+          )}
+        </div>
       </>
     );
   },
 });
 
 // TODO Figure out how to only validate current on blur. Currently have to hide error messages with isTouched status
-const MyForm = () => {
+// TODO Issue with language switching.
+const MyForm = ({ lng }: { lng: string }) => {
+  const { t } = useTranslation(lng, "reacthookform");
   const [step, setStep] = useState(0);
   const [modifier, setModifier] = useState(1);
-
   const [isPending, startTransition] = useTransition();
 
   const form = useAppForm({
     ...formOpts,
     validators: {
-      // Pass a schema or function to validate
-      // @ts-expect-error: Tanstack form doesn't accept enums
-      onChange: formSchema,
+      // @ts-expect-error Translation changes
+      onChange: createFormSchema(t),
     },
-    onSubmit: ({ value }) => onSubmit(value as FormValues), // Assertion for compatibility
+    onSubmit: ({ value }) => onSubmit(value as FormValues),
   });
 
   const updateUserStore = useUserStore((state) => state.updateUser);
@@ -314,13 +364,13 @@ const MyForm = () => {
   const content = useMemo(() => {
     switch (step) {
       case 0:
-        return <Page1 form={form} />;
+        return <Page1 form={form} lng={lng} />;
       case 1:
-        return <Page2 form={form} />;
+        return <Page2 form={form} lng={lng} />;
       case 2:
-        return <Page3 form={form} />;
+        return <Page3 form={form} lng={lng} />;
     }
-  }, [step, form]);
+  }, [step, form, lng]);
 
   const { mutate } = useMutation({
     mutationFn: submitForm,

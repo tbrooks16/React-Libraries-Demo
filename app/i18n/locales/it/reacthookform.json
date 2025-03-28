@@ -1,0 +1,75 @@
+{
+  "lookAtCode": "Guarda il codice",
+  "checkComponent": "Controlla il codice del modulo in ReactHookForm.tsx",
+  "title": "ReactHookForm",
+  "intro": "Questa è una semplice dimostrazione di un modulo utilizzando React Hook Form. Inserisci email e password per passare al passaggio successivo.",
+  "description": {
+    "validation": "React Hook Form fornisce API estensibili per interagire con l'intero processo di invio del modulo. In questo modulo, essendo il processo una serie di passaggi, posso attivare manualmente la validazione su campi selezionati.",
+    "conditional": "Richiedo anche condizionalmente l'altro campo se la selezione scelta è 'altro'."
+  },
+  "form": {
+    "cardTitle": "Un Modulo Semplice",
+    "cardDescription": "Compila il modulo o sarai licenziato",
+    "email": {
+      "label": "Email",
+      "placeholder": "test@test.com",
+      "description": "Il tuo indirizzo email"
+    },
+    "password": {
+      "label": "Password",
+      "placeholder": "******",
+      "description": "La tua password segreta"
+    },
+    "firstName": {
+      "label": "Nome",
+      "placeholder": "Mario",
+      "description": "Che bel nome!"
+    },
+    "lastName": {
+      "label": "Cognome",
+      "placeholder": "Rossi",
+      "description": "Come si scrive?"
+    },
+    "experience": {
+      "label": "Esperienza",
+      "description": "Raccontaci la tua esperienza",
+      "options": {
+        "loved": "Ho amato questo modulo",
+        "ok": "Questo modulo era ok",
+        "disliked": "Non mi è piaciuto questo modulo",
+        "other": "Altro"
+      }
+    },
+    "other": {
+      "label": "Altro",
+      "placeholder": "Scrivi la tua risposta qui",
+      "description": "Dimmi cosa non ti è piaciuto"
+    },
+    "summary": {
+      "title": "Riepilogo",
+      "description": "Controlla i tuoi dati prima dell'invio"
+    }
+  },
+  "errors": {
+    "email": {
+      "invalid": "Inserisci un indirizzo email valido"
+    },
+    "password": {
+      "min": "La password deve contenere almeno 6 caratteri",
+      "max": "La password non può superare i 20 caratteri"
+    },
+    "firstName": {
+      "required": "Il nome è obbligatorio"
+    },
+    "lastName": {
+      "required": "Il cognome è obbligatorio"
+    },
+    "experience": {
+      "required": "L'esperienza è obbligatoria"
+    },
+    "other": {
+      "required": "Questo campo è obbligatorio",
+      "conditional": "Questo campo è obbligatorio quando l'esperienza è 'Altro'"
+    }
+  }
+}

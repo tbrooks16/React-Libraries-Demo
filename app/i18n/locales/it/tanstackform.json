@@ -1,0 +1,15 @@
+{
+  "lookAtCode": "Guarda il codice",
+  "checkComponent": "Controlla il codice del modulo in TanStackForm.tsx",
+  "title": "TanStack Form",
+  "intro": "Questa è una semplice dimostrazione di un modulo utilizzando il nuovo TanStack Form. Inserisci email e password per passare al passaggio successivo del modulo.",
+  "description": {
+    "newLibrary": "Tanstack Form è una libreria molto nuova. Quindi capire il suo modo di fare le cose è stato fastidioso. Per quanto riguarda le funzionalità, non so se ci siano differenze significative rispetto a ReactHookForm. Troverai molte più risorse e migliori esempi con React Hook Form.",
+    "similarity": "Dal punto di vista funzionale, entrambi i moduli seguono un formato simile e condividono lo stesso schema.",
+    "architecture": "Ho avuto problemi a spostare i componenti di questa architettura in file separati a causa del modo in cui viene importato tutto. Non ho approfondito la soluzione di questi problemi, quindi la maggior parte del codice di questa pagina si trova nel file TanStackForm.tsx."
+  },
+  "caveat": {
+    "title": "Avvertenze",
+    "description": "Tanstack Form non causa re-render quando si interagisce con il modulo. Quindi potresti trovarti a cercare di utilizzare un valore dello stato del modulo o del campo senza successo."
+  }
+}

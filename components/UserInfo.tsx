@@ -9,9 +9,8 @@ import {
 import { useUserStore } from "@/lib/providers";
 
 export const UserInfo = () => {
-  const { email, firstName, lastName, password, other } = useUserStore(
-    (state) => state,
-  );
+  const { email, firstName, lastName, password, other, experience, language } =
+    useUserStore((state) => state);
 
   return (
     <>
@@ -28,6 +27,8 @@ export const UserInfo = () => {
           <div>Last Name: {lastName}</div>
           <div>Password: {password}</div>
           <div>Other: {other}</div>
+          <div>Experience: {experience}</div>
+          <div>Language: {language}</div>
         </CardContent>
       </Card>
     </>

@@ -1,0 +1,11 @@
+{
+  "lookAtCode": "Guarda il codice",
+  "checkComponent": "Controlla il codice di questo componente in zustand/page.tsx",
+  "getUserData": "Per ottenere i dati utente, compila il modulo in",
+  "or": "o",
+  "title": "Zustand",
+  "simpleState": "Zustand è un semplice gestore di stato. Aggiorni lo stato, chiami la funzione di mutazione e poi puoi accedere alle nuove informazioni ovunque nella tua app.",
+  "singleStore": "Zustand raccomanda di avere un singolo store che viene esportato in tutta l'applicazione. Tuttavia, in NextJS si raccomanda di non utilizzare un singolo store esportato globalmente. Questo perché NextJS, con l'introduzione degli RSC, svolge molto lavoro sul server, pre-render.",
+  "readCaveats": "Leggi le avvertenze",
+  "persistStore": "Puoi anche persistere lo store in un meccanismo di archiviazione."
+}
