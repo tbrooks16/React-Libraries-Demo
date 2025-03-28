@@ -17,10 +17,12 @@ export const Combobox = ({
   value,
   setValue,
   data,
+  placeholder,
 }: {
   value: string;
   setValue: (q: string) => void;
   data: Message[] | undefined;
+  placeholder: string;
 }) => {
   const [open, setOpen] = useState(false);
   return (
@@ -30,17 +32,17 @@ export const Combobox = ({
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-full my-2 cursor-pointer"
+          className="my-2 w-full cursor-pointer"
         >
-          {value || "Ask a question..."}
+          {value || placeholder}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
         <Command>
-          <CommandInput placeholder="Ask a question..." />
+          <CommandInput placeholder={placeholder} />
           <CommandList>
-            <CommandEmpty>No question found.</CommandEmpty>
+            <CommandEmpty>Not found</CommandEmpty>
             <CommandGroup>
               {questions.map((question, i) => (
                 <CommandItem
@@ -55,7 +57,7 @@ export const Combobox = ({
                   <Check
                     className={cn(
                       "mr-2 h-4 w-4",
-                      value === question ? "opacity-100" : "opacity-0"
+                      value === question ? "opacity-100" : "opacity-0",
                     )}
                   />
                   {question}

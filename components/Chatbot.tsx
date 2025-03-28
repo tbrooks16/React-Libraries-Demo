@@ -98,7 +98,12 @@ export default function Chatbot() {
           />
         </>
       )}
-      <Combobox value={message} setValue={setMessage} data={data} />
+      <Combobox
+        value={message}
+        setValue={setMessage}
+        data={data}
+        placeholder="Ask a question..."
+      />
       {index >= 10 && (
         <Button
           type="button"

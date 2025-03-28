@@ -12,13 +12,15 @@ import {
   CommandList,
 } from "./ui/command";
 
-export const ExperienceComboBox = ({
+export const CustomCombobox = ({
+  options,
   value,
-  onSelect,
   controlled = false,
+  onSelect,
 }: {
-  value: (typeof experienceOptions)[number];
-  onSelect: (name: (typeof experienceOptions)[number]) => void;
+  options: readonly string[];
+  value: string;
+  onSelect: (name: string) => void;
   controlled: boolean;
 }) => (
   <Popover>
@@ -33,9 +35,7 @@ export const ExperienceComboBox = ({
               !value && "text-muted-foreground",
             )}
           >
-            {value
-              ? experienceOptions.find((val) => val === value)
-              : "Select an option"}
+            {value ? options.find((val) => val === value) : "Select an option"}
             <ChevronsUpDown className="opacity-50" />
           </Button>
         </FormControl>
@@ -48,9 +48,7 @@ export const ExperienceComboBox = ({
             !value && "text-muted-foreground",
           )}
         >
-          {value
-            ? experienceOptions.find((val) => val === value)
-            : "Select an option"}
+          {value ? options.find((val) => val === value) : "Select an option"}
           <ChevronsUpDown className="opacity-50" />
         </Button>
       )}
@@ -61,7 +59,7 @@ export const ExperienceComboBox = ({
         <CommandList>
           <CommandEmpty>No framework found.</CommandEmpty>
           <CommandGroup>
-            {experienceOptions.map((val) => (
+            {options.map((val) => (
               <CommandItem
                 className="cursor-pointer"
                 value={val}
@@ -83,10 +81,3 @@ export const ExperienceComboBox = ({
     </PopoverContent>
   </Popover>
 );
-
-export const experienceOptions = [
-  "I loved this form",
-  "This form was ok",
-  "I did not like this form",
-  "Other",
-] as const;
